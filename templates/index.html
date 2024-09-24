@@ -1,0 +1,135 @@
+<html>
+<head>
+  <base href="https://websim.io/lab-reserva/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva de Laboratórios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFA500;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #FFA500;
+      text-align: center;
+      font-weight: bold;
+    }
+    form {
+      display: grid;
+      gap: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #FFA500;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #FF8C00;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+    #reservations {
+      margin-top: 20px;
+    }
+    #reservations table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #reservations th, #reservations td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    #reservations th {
+      background-color: #FFA500;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reserva de Laboratórios</h1>
+    <form id="reservationForm">
+      <label for="lab">Laboratório:</label>
+      <select id="lab" required>
+        <option value="">Selecione um laboratório</option>
+        <option value="Informática 1">Informática 1</option>
+        <option value="Informática 2">Informática 2</option>
+        <option value="Informática 3">Informática 3</option>
+        <option value="Informática 4">Informática 4</option>
+        <option value="Farmácia">Farmácia</option>
+        <option value="Enfermagem">Enfermagem</option>
+        <option value="Fisioterapia">Fisioterapia</option>
+        <option value="Educação Física">Educação Física</option>
+        <option value="Multidisciplinar">Multidisciplinar</option>
+        <option value="Microscopia">Microscopia</option>
+        <option value="Anatomia">Anatomia</option>
+      </select>
+
+      <label for="date">Data:</label>
+      <input type="date" id="date" required>
+
+      <label for="professor">Nome do Professor:</label>
+      <input type="text" id="professor" required>
+
+      <label for="discipline">Disciplina:</label>
+      <input type="text" id="discipline" required>
+
+      <label for="materials">Materiais Necessários:</label>
+      <textarea id="materials" rows="3"></textarea>
+
+      <button type="submit">Reservar</button>
+    </form>
+
+    <div id="error" class="error"></div>
+
+    <div id="reservations">
+      <h2>Reservas Atuais</h2>
+      <label for="filterDate">Filtrar por data:</label>
+      <input type="date" id="filterDate">
+      <button>Filtrar</button>
+      <button>Gerar Relatório</button>
+      <table id="reservationsTable">
+        <thead>
+          <tr>
+            <th>Laboratório</th>
+            <th>Data</th>
+            <th>Professor</th>
+            <th>Disciplina</th>
+            <th>Materiais</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
