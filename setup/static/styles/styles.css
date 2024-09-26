@@ -7,32 +7,40 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
 .container {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
   width: 90%;
   max-width: 800px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 h1 {
   color: #FFA500;
   text-align: center;
   font-weight: bold;
 }
+
 form {
   display: grid;
   gap: 10px;
 }
+
 label {
   font-weight: bold;
 }
-input, select, textarea {
+
+input,
+select,
+textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 button {
   background-color: #FFA500;
   color: white;
@@ -42,26 +50,100 @@ button {
   cursor: pointer;
   font-weight: bold;
 }
+
 button:hover {
   background-color: #FF8C00;
 }
+
 .error {
   color: red;
   font-weight: bold;
 }
+
 #reservations {
   margin-top: 20px;
 }
+
 #reservations table {
   width: 100%;
   border-collapse: collapse;
 }
-#reservations th, #reservations td {
+
+#reservations th,
+#reservations td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
+
 #reservations th {
   background-color: #FFA500;
   color: white;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.modal {
+  display: none;
+  /* Oculto por padrão */
+  position: fixed;
+  /* Fica fixo */
+  z-index: 1;
+  /* Fica na frente */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Largura total */
+  height: 100%;
+  /* Altura total */
+  overflow: auto;
+  /* Habilita rolagem se necessário */
+  background-color: rgb(0, 0, 0);
+  /* Cor de fundo */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fundo preto com opacidade */
+}
+
+.modal.show {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* Centraliza a modal */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Largura da modal */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.terms-checkbox {
+  width: 20px;
+  /* Aumenta a largura da checkbox */
+  height: 20px;
+  /* Aumenta a altura da checkbox */
+  margin-right: 10px;
+  /* Espaço entre a checkbox e o texto */
+  vertical-align: middle;
+  /* Alinha a checkbox verticalmente ao centro do texto */
 }

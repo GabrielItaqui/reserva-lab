@@ -34,11 +34,46 @@
       <label for="materials">Materiais Necessários:</label>
       <textarea id="materials" name="materials" rows="3"></textarea>
 
+      <div>
+        <input type="checkbox" id="termsCheckbox" class="terms-checkbox" required>
+        <label for="termsCheckbox">Concordo com os <a href="#" id="termsLink">termos de reserva</a></label>
+      </div>
+
+      <!-- Modal -->
+      <div id="termsModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Orientações sobre Reservas e Uso de Laboratórios</h2>
+
+          <p>As reservas devem ser realizadas com antecedência mínima de 48 horas antes da aula, permitindo assim o adequado planejamento quanto à disponibilização de insumos e eventuais solicitações que necessitem de maior tempo de preparo, como meios de cultura, por exemplo.</p>
+      
+          <p>Os materiais solicitados serão organizados e disponibilizados no laboratório para uso. É importante ressaltar que não será concedido acesso à chave dos estoques ou a materiais não solicitados em cima da hora. Para evitar erros e confusões, recomenda-se que as listas de materiais necessários sejam enviadas de forma precisa e completa.</p>
+      
+          <p>Em caso de quebra de equipamentos ou vidrarias durante a aula, a instituição disponibiliza um formulário (<a href="https://forms.office.com/r/vn8m1RLfBG" target="_blank">Clique aqui</a>) que deve ser preenchido para que se possam tomar as devidas providências quanto à reposição ou conserto dos itens danificados.</p>
+      
+          <p>Para o uso de materiais descartáveis, como agulhas e seringas, assim como para o eventual término de reagentes, é imprescindível que os alunos preencham o formulário (<a href="https://forms.office.com/r/z0yg90DD9U" target="_blank">Clique aqui</a>) a fim de assegurar um controle eficiente de estoque e reposição.</p>
+      
+          <p>Além disso, é fundamental que os alunos estejam cientes do manual de boas práticas de laboratório. Algumas recomendações incluem:</p>
+          
+          <ol>
+              <li><strong>Utilização de Jaleco:</strong> O uso de jaleco durante as aulas práticas é obrigatório. A faculdade disponibiliza alguns jalecos para os alunos que eventualmente os esquecerem; no entanto, reforça-se a importância de cada aluno ter o seu próprio.</li>
+              <li><strong>Proibição de Alimentos e Bebidas:</strong> É estritamente proibida a entrada de alimentos e bebidas nos laboratórios, independentemente da natureza das práticas que serão realizadas, seja com reagentes perigosos ou não.</li>
+              <li><strong>Cuidados com Cabelos e Acessórios:</strong> Os alunos devem manter cabelos longos presos e evitar o uso de adornos durante as atividades laboratoriais, garantindo assim a segurança de todos.</li>
+              <li><strong>Manipulação Segura:</strong> É imperativo que os alunos manipulem equipamentos e reagentes sob supervisão, a fim de prevenir acidentes e danos materiais.</li>
+              <li><strong>Uso de Equipamentos de Segurança:</strong> Os alunos devem ser instruídos sobre o uso adequado de chuveiros lava-olhos e outros equipamentos de segurança disponíveis nos laboratórios, assim como sobre a sua localização e procedimentos para acionamento.</li>
+          </ol>
+          <p><strong>Também confirmo</strong> que li os termos de boa prática do laboratório e que tive uma aula de orientação com os alunos sobre as diretrizes e procedimentos mencionados.</p>
+          <p>Sugere-se que essas orientações sejam repassadas com clareza a todos os alunos, enfatizando a importância da adesão a essas práticas para garantir um ambiente seguro e produtivo durante as aulas práticas.</p>
+        </div>
+      </div>
+
       <button type="submit">Reservar</button>
     </form>
 
     {% if error %}
     <div class="error">{{ error }}</div>
+    {% elif success %}
+    <div class="success"> {{ success }}</div>
     {% endif %}
 
     <div id="reservations">
@@ -104,38 +139,59 @@
   <script>
     // Função para filtrar a tabela com base na seleção do usuário
     document.querySelectorAll('#reservationsTable thead select').forEach(select => {
-      select.addEventListener('change', function() {
+      select.addEventListener('change', function () {
         const valueLab = document.getElementById('filterLab').value.toLowerCase();
         const valueProfessor = document.getElementById('filterProfessor').value.toLowerCase();
         const valueDiscipline = document.getElementById('filterDiscipline').value.toLowerCase();
         const rows = document.querySelectorAll('#reservationsTable tbody tr');
-  
+
         rows.forEach(row => {
           const cellLab = row.cells[0].textContent.toLowerCase();
           const cellProfessor = row.cells[2].textContent.toLowerCase();
           const cellDiscipline = row.cells[3].textContent.toLowerCase();
-  
+
           const matchesLab = valueLab === '' || cellLab.includes(valueLab);
           const matchesProfessor = valueProfessor === '' || cellProfessor.includes(valueProfessor);
           const matchesDiscipline = valueDiscipline === '' || cellDiscipline.includes(valueDiscipline);
-  
+
           row.style.display = matchesLab && matchesProfessor && matchesDiscipline ? '' : 'none';
         });
       });
     });
-  
+
     // Lógica para resetar os filtros
-    document.getElementById('resetFilters').addEventListener('click', function() {
+    document.getElementById('resetFilters').addEventListener('click', function () {
       document.getElementById('filterLab').selectedIndex = 0;
       document.getElementById('filterProfessor').selectedIndex = 0;
       document.getElementById('filterDiscipline').selectedIndex = 0;
-  
+
       // Mostrar todas as linhas novamente
       const rows = document.querySelectorAll('#reservationsTable tbody tr');
       rows.forEach(row => {
         row.style.display = '';
       });
     });
+
+    // Abre o modal
+    document.getElementById('termsLink').addEventListener('click', function (event) {
+      event.preventDefault(); // Evita o comportamento padrão do link
+      document.getElementById('termsModal').style.display = 'block';
+    });
+
+    // Fecha o modal ao clicar no 'x'
+    document.querySelector('.close').addEventListener('click', function () {
+      document.getElementById('termsModal').style.display = 'none';
+    });
+
+    // Fecha o modal ao clicar fora da modal
+    window.addEventListener('click', function (event) {
+      const modal = document.getElementById('termsModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+
   </script>
 </body>
 

@@ -1,6 +1,5 @@
 from pathlib import Path, os
 from dotenv import load_dotenv
-from main.services import initialize_gspread
 
 load_dotenv()
 
@@ -104,7 +103,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -118,5 +116,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-GSPREAD_CLIENT = initialize_gspread()  # Starting the gspread client when our server starts speeds things up; it avoids re-authenticating on each request

@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from .services import get_all_rows, initialize_gspread
+from .services import get_all_rows, GSPREAD_CLIENT
 from setup.static.data.laboratorios import LABORATORIOS
 from datetime import datetime, timedelta
 
-GSPREAD_CLIENT = initialize_gspread()
 
 def reservation_form(request):
     context = {"laboratorios": LABORATORIOS}
@@ -36,6 +35,7 @@ def reservation_form(request):
                 sh = GSPREAD_CLIENT.open("Test sheet")
                 worksheet = sh.get_worksheet(0)
                 worksheet.append_row([laboratorio, data, professor, disciplina, materiais])
+                context["success"] = "Reserva realizada com sucesso!"
                 return redirect("reservation_form")
 
     reservations = get_all_rows("Test sheet")
