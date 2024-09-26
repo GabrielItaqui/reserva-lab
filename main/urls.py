@@ -1,6 +1,6 @@
 from django.urls import path
-from main.views import index
+from .views import reservation_form
 
 urlpatterns = [
-    path('', index)
+    path('', reservation_form, name='reservation_form')
 ]
